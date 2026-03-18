@@ -1,88 +1,88 @@
 # Mercenary Company
 
-Campaign strategy RPG prototype centered on mercenary logistics, map movement, territorial pressure, rival companies and consequence-heavy mission resolution.
+Prototype de RPG estratégico de campanha focado em logística mercenária, deslocamento no mapa, pressão territorial, companhias rivais e resolução de missões com consequência.
 
-## Current State
+## Estado Atual
 
-This is no longer a bare prototype of contracts and combat. The project now includes:
+O projeto já não é mais um esboço simples de contratos e combate. Hoje ele inclui:
 
-- strategic map as the main game surface
-- travel routes with ETA, weather, access rules and interception risk
-- regional war states, siege pressure and rival movement
-- contracts tied to geography, deadlines, extraction and strategic value
-- company simulation with injuries, deaths, loyalty, stress and progression
-- base upgrades plus forward posts with storage, fortification and specialization
-- persistent lore/archive rewards and item provenance
-- local and remote save with versioned persistence metadata
-- modular backend for state, summary, validation and Stripe skeleton checkout
+- mapa estratégico como superfície principal do jogo
+- rotas com ETA, clima, permissões e risco de interceptação
+- estados regionais de guerra, cerco e presença rival
+- contratos ligados à geografia, prazo, extração e valor estratégico
+- simulação da companhia com ferimentos, mortes, lealdade, estresse e progressão
+- upgrades de base e postos avançados com estoque, fortificação e especialização
+- recompensas persistentes de lore/arquivo e itens com proveniência
+- save local e remoto com metadados versionados
+- backend modular para estado, resumo, validação e skeleton de Stripe
 
-## Product Direction
+## Direção De Produto
 
-The current product definition lives in [PRODUCT_MVP.md](/mnt/c/Users/Ian/mercenary-company/PRODUCT_MVP.md).
+A definição atual do produto está em [PRODUCT_MVP.md](/mnt/c/Users/Ian/mercenary-company/PRODUCT_MVP.md).
 
-That document now defines:
+Esse documento define:
 
-- the core fantasy
-- target audience
-- MVP scope
-- demo build scope
-- launch-critical requirements
-- post-MVP roadmap
+- fantasia central
+- público-alvo
+- escopo de MVP
+- escopo da demo
+- requisitos críticos para lançamento
+- roadmap pós-MVP
 
-## Main Systems
+## Sistemas Principais
 
-### Campaign
+### Campanha
 
-- map-first campaign flow
-- route planning and travel orders
-- climate, season, permits and route lockouts
-- rival companies competing on the same geography
-- territorial pressure and front states
+- fluxo de campanha orientado pelo mapa
+- planejamento de rota e ordens de viagem
+- clima, estação, permissões e bloqueios de rota
+- companhias rivais competindo no mesmo mapa
+- pressão territorial e estados de fronteira
 
-### Contracts
+### Contratos
 
-- local and remote contracts
-- strategic value and travel deadlines
-- extraction follow-ups
-- negotiation
-- richer briefings and reward notes
+- contratos locais e remotos
+- valor estratégico e prazo geográfico
+- extração pós-missão
+- negociação
+- briefings e notas de recompensa mais ricas
 
-### Company
+### Companhia
 
-- recruit generation by class, trait and origin
-- loyalty, ambition, camaraderie and stress
-- injuries, deaths and memorial
-- squad synergies
-- archive and armory accumulation
+- geração de recrutas por classe, traço e origem
+- lealdade, ambição, camaradagem e estresse
+- ferimentos, mortes e memorial
+- sinergias de squad
+- arquivo e arsenal persistentes
 
-### Infrastructure
+### Infraestrutura
 
-- base upgrades
-- forward posts with:
-  - stockpiles
-  - integrity
-  - guard rating
-  - level
-  - specialization
+- upgrades de base
+- postos avançados com:
+  - estoque
+  - integridade
+  - guarda
+  - nível
+  - especialização
 
-### Persistence
+### Persistência
 
-- local save envelope with version metadata
-- Supabase remote save
-- optional API-based save flow through backend
-- backend validation and summary endpoints
+- save local com envelope versionado
+- save remoto via Supabase
+- fluxo opcional de save via backend
+- backend com validação e resumo de campanha
 
-## Architecture
+## Arquitetura
 
-- [src/types/game.ts](/mnt/c/Users/Ian/mercenary-company/src/types/game.ts): canonical domain model
-- [src/seed/seedState.ts](/mnt/c/Users/Ian/mercenary-company/src/seed/seedState.ts): initial campaign seed
-- [src/services/](/mnt/c/Users/Ian/mercenary-company/src/services): gameplay engines
-- [src/app/](/mnt/c/Users/Ian/mercenary-company/src/app): controller and main application shell
-- [src/components/](/mnt/c/Users/Ian/mercenary-company/src/components): presentation layer
-- [server/src/](/mnt/c/Users/Ian/mercenary-company/server/src): modular backend
-- [server/sql/](/mnt/c/Users/Ian/mercenary-company/server/sql): schema, seed and alignment migration
+- [src/types/game.ts](/mnt/c/Users/Ian/mercenary-company/src/types/game.ts): modelo canônico do domínio
+- [src/seed/seedState.ts](/mnt/c/Users/Ian/mercenary-company/src/seed/seedState.ts): seed inicial da campanha
+- [src/services/](/mnt/c/Users/Ian/mercenary-company/src/services): engines e regras de gameplay
+- [src/app/](/mnt/c/Users/Ian/mercenary-company/src/app): controller e shell principal da aplicação
+- [src/components/](/mnt/c/Users/Ian/mercenary-company/src/components): camada de apresentação
+- [server/src/](/mnt/c/Users/Ian/mercenary-company/server/src): backend modular
+- [server/sql/](/mnt/c/Users/Ian/mercenary-company/server/sql): schema, seed e migração de alinhamento
 
-## Important Service Areas
+## Áreas Importantes Do Código
 
 - [combatSimulator.ts](/mnt/c/Users/Ian/mercenary-company/src/services/combatSimulator.ts)
 - [strategicMapEngine.ts](/mnt/c/Users/Ian/mercenary-company/src/services/strategicMapEngine.ts)
@@ -93,9 +93,9 @@ That document now defines:
 - [contentEngine.ts](/mnt/c/Users/Ian/mercenary-company/src/services/contentEngine.ts)
 - [persistence.ts](/mnt/c/Users/Ian/mercenary-company/src/services/persistence.ts)
 
-## Backend Endpoints
+## Endpoints Do Backend
 
-The backend currently exposes:
+Atualmente o backend expõe:
 
 - `GET /health`
 - `GET /state?companyId=...`
@@ -104,32 +104,32 @@ The backend currently exposes:
 - `PUT /state`
 - `POST /stripe/create-checkout-session`
 
-## SQL Order
+## Ordem Do SQL
 
-Run these in order:
+Execute nesta ordem:
 
 1. [001_schema.sql](/mnt/c/Users/Ian/mercenary-company/server/sql/001_schema.sql)
 2. [002_seed.sql](/mnt/c/Users/Ian/mercenary-company/server/sql/002_seed.sql)
 3. [003_alignment.sql](/mnt/c/Users/Ian/mercenary-company/server/sql/003_alignment.sql)
 
-## Environment
+## Variáveis De Ambiente
 
 Frontend `.env`:
 
 - `VITE_SUPABASE_URL`
 - `VITE_SUPABASE_PUBLISHABLE_KEY`
 - `VITE_STRIPE_PUBLISHABLE_KEY`
-- optional: `VITE_API_BASE_URL`
+- opcional: `VITE_API_BASE_URL`
 
 Backend `server/.env`:
 
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `STRIPE_SECRET_KEY`
-- optional: `PORT`
-- optional: `CORS_ORIGIN`
+- opcional: `PORT`
+- opcional: `CORS_ORIGIN`
 
-## Run
+## Rodando Localmente
 
 Frontend:
 
@@ -147,30 +147,33 @@ npm install
 npm run dev
 ```
 
-Frontend default: `http://localhost:5173`
+Padrão:
 
-Backend default: `http://localhost:8787`
+- frontend: `http://localhost:5173`
+- backend: `http://localhost:8787`
 
-## Demo Quickstart
+## Fluxo Rápido Da Demo
 
-If you are opening the project as a demo rather than a dev sandbox, use this flow first:
+Se a ideia for testar a demo e não explorar tudo como sandbox, siga este fluxo:
 
-1. Open the `Map`
-2. Explore the current node
-3. Open a `Site Operation`
-4. Travel to a remote node
-5. Resolve at least one `Journey Incident`
-6. Take one contract and review the `Chronicle`
+1. abrir o `Map`
+2. explorar o nó atual
+3. abrir uma `Site Operation`
+4. viajar para outro nó
+5. resolver pelo menos um `Journey Incident`
+6. pegar um contrato e revisar a `Chronicle`
 
-The current build is strongest when played as a `30-45 minute atlas campaign slice`, not as a long sandbox session.
+A build atual funciona melhor como uma demo de `30-45 minutos` de campanha estratégica, não como sandbox longa.
 
-For a tester-facing walkthrough, use [DEMO_GUIDE.md](/mnt/c/Users/Ian/mercenary-company/DEMO_GUIDE.md).
-For a presenter/release handoff checklist, use [EXPOSURE_CHECKLIST.md](/mnt/c/Users/Ian/mercenary-company/EXPOSURE_CHECKLIST.md).
-For GitHub publishing prep, use [GITHUB_PREP.md](/mnt/c/Users/Ian/mercenary-company/GITHUB_PREP.md).
+Documentos auxiliares:
 
-## Validation
+- [DEMO_GUIDE.md](/mnt/c/Users/Ian/mercenary-company/DEMO_GUIDE.md)
+- [EXPOSURE_CHECKLIST.md](/mnt/c/Users/Ian/mercenary-company/EXPOSURE_CHECKLIST.md)
+- [GITHUB_PREP.md](/mnt/c/Users/Ian/mercenary-company/GITHUB_PREP.md)
 
-Current validation commands:
+## Validação
+
+Comandos principais:
 
 ```bash
 npm run typecheck
@@ -178,10 +181,59 @@ npm test
 node --check server/src/index.mjs
 ```
 
-At the latest pass, they are all green.
-
-You can also run the full frontend demo validation with:
+Validação completa da demo:
 
 ```bash
 npm run demo:check
 ```
+
+## Subir Para O GitHub
+
+Primeira subida do projeto:
+
+```bash
+cd C:\Users\Ian\mercenary-company
+git init
+git branch -M main
+git remote add origin https://github.com/iangama/Mercenary-simulator.git
+git add .
+git commit -m "Initial playable campaign build"
+git push -u origin main
+```
+
+Se `origin` já existir:
+
+```bash
+git remote set-url origin https://github.com/iangama/Mercenary-simulator.git
+```
+
+Se o Git reclamar de identidade:
+
+```bash
+git config user.name "Ian Gama"
+git config user.email "SEU_EMAIL_DO_GITHUB"
+```
+
+## Como Atualizar O Repositório Depois
+
+Depois da primeira subida, o fluxo normal é:
+
+```bash
+cd C:\Users\Ian\mercenary-company
+git status
+git add .
+git commit -m "Describe update"
+git push
+```
+
+Se quiser revisar antes de commitar:
+
+```bash
+git diff
+```
+
+## Observações
+
+- não suba `.env` nem `server/.env`
+- use os arquivos `.env.example` como referência
+- se for publicar online depois, escolha a estratégia de deploy separadamente
