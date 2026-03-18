@@ -5,7 +5,7 @@ import { supabase } from '../lib/supabase/client';
 const KEY = 'mercenary-company-state-v2';
 const LEGACY_KEY = 'mercenary-company-state-v1';
 const SAVE_VERSION = 2;
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string | undefined;
+const API_BASE_URL = ((import.meta.env.VITE_API_BASE_URL as string | undefined) || (import.meta.env.PROD ? '/api' : undefined))?.replace(/\/$/, '');
 
 interface SaveEnvelope {
   version: number;

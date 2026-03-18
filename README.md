@@ -238,3 +238,24 @@ git diff
 - não suba `.env` nem `server/.env`
 - use os arquivos `.env.example` como referência
 - se for publicar online depois, escolha a estratégia de deploy separadamente
+
+## Vercel Com Link Único
+
+O projeto agora também está preparado para deploy no Vercel com frontend e API no mesmo domínio:
+
+- frontend em `/`
+- API em `/api/health`
+- API em `/api/state`
+- API em `/api/state/summary`
+- API em `/api/state/validate`
+- API em `/api/stripe/create-checkout-session`
+
+Para isso, basta configurar no Vercel:
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_PUBLISHABLE_KEY`
+- `VITE_STRIPE_PUBLISHABLE_KEY`
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `STRIPE_SECRET_KEY`
+- opcional: `CORS_ORIGIN`
