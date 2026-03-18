@@ -488,7 +488,9 @@ export function App() {
                 <button title="Load speculative cargo for trade runs." onClick={game.loadTradeGoods}>Load Trade Goods</button>
                 <button title="Sell carried trade goods into the local market." onClick={game.unloadTradeGoods}>Sell Trade Goods</button>
                 <button title="Establish a forward post at the current node." onClick={game.establishPost}>Establish Forward Post</button>
-                <button title="Push or pull the current campaign state to remote persistence." onClick={game.syncRemote}>Sync Supabase</button>
+                {game.remoteSyncEnabled && (
+                  <button title="Push or pull the current campaign state to remote persistence." onClick={game.syncRemote}>Sync Supabase</button>
+                )}
                 <button title="Reset the campaign and show onboarding again." onClick={game.resetCampaign}>Reset Campaign</button>
               </div>
             </section>

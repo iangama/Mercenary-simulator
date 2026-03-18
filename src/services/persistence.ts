@@ -166,12 +166,17 @@ export function saveLocalState(state: GlobalGameState) {
 
 export async function pullRemoteState(companyId: string) {
   if (API_BASE_URL) {
-    const response = await fetch(`${API_BASE_URL}/state?companyId=${encodeURIComponent(companyId)}`);
-    if (!response.ok) return null;
-    const data = (await response.json()) as { state?: unknown };
-    return data.state ? hydrateState(unwrapSaveEnvelope(data.state)) : null;
+    try {
+      const response = await fetch(`${API_BASE_URL}/state?companyId=${encodeURIComponent(companyId)}`);
+      if (!response.ok) return null;
+      const data = (await response.json()) as { state?: unknown };
+      return data.state ? hydrateState(unwrapSaveEnvelope(data.state)) : null;
+    } catch {
+      return null;
+    }
   }
 
+  if (!supabase) return null;
   const { data } = await supabase
     .from('game_state')
     .select('state_json, save_version')
@@ -184,17 +189,22 @@ export async function pullRemoteState(companyId: string) {
 export async function pushRemoteState(state: GlobalGameState) {
   const envelope = buildSaveEnvelope(state);
   if (API_BASE_URL) {
-    await fetch(`${API_BASE_URL}/state`, {
-      method: 'PUT',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        company_id: state.company.id,
-        state_json: envelope
-      })
-    });
+    try {
+      await fetch(`${API_BASE_URL}/state`, {
+        method: 'PUT',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          company_id: state.company.id,
+          state_json: envelope
+        })
+      });
+    } catch {
+      // Remote persistence is optional in the frontend-only demo build.
+    }
     return;
   }
 
+  if (!supabase) return;
   const payload = {
     company_id: state.company.id,
     state_json: envelope,

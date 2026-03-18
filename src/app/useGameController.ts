@@ -67,6 +67,11 @@ export interface CampaignProgressView {
   momentum: 'poor' | 'stable' | 'strong';
 }
 
+const REMOTE_SYNC_ENABLED = Boolean(
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY)
+);
+
 function buildDailySummary(prev: GlobalGameState, next: GlobalGameState): DailySummary {
   const contractsAvailable = next.contracts.filter((contract) => contract.status === 'available').length;
   const rivalRegions = next.regions.filter((region) => region.rival_presence >= 45).length;
@@ -556,6 +561,10 @@ export function useGameController() {
   }
 
   async function syncRemote() {
+    if (!REMOTE_SYNC_ENABLED) {
+      setActionNotice({ tone: 'info', message: 'Remote sync is disabled in this demo build. Progress is being saved locally in your browser.' });
+      return;
+    }
     const remote = await pullRemoteState(state.company.id);
     if (remote) {
       setState(remote);
@@ -615,6 +624,7 @@ export function useGameController() {
     priorities,
     contextualTips,
     campaignProgressView,
+    remoteSyncEnabled: REMOTE_SYNC_ENABLED,
     toggleSquad,
     executeMission,
     tickWorld,

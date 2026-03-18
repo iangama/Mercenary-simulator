@@ -250,6 +250,17 @@ O projeto agora também está preparado para deploy no Vercel com frontend e API
 - API em `/api/state/validate`
 - API em `/api/stripe/create-checkout-session`
 
+### Demo Sem Backend
+
+Se você quiser publicar só a demo para portfólio/GitHub, o projeto também funciona sem Supabase e sem Stripe:
+
+- save local continua funcionando
+- mapa, contratos, combate e campanha continuam funcionando
+- sync remoto fica desabilitado
+- Stripe fica fora da demo
+
+Nesse modo, você pode subir no Vercel sem configurar credenciais externas.
+
 Para isso, basta configurar no Vercel:
 
 - `VITE_SUPABASE_URL`
