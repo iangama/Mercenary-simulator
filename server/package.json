@@ -1,0 +1,12 @@
+{
+  "name": "mercenary-company-server",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index.mjs",
+    "start": "node src/index.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.56.0"
+  }
+}
