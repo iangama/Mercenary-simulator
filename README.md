@@ -270,3 +270,4 @@ Para isso, basta configurar no Vercel:
 - `SUPABASE_SERVICE_ROLE_KEY`
 - `STRIPE_SECRET_KEY`
 - opcional: `CORS_ORIGIN`
+- Link da demo para testes " https://mercenary-simulator.vercel.app/"
