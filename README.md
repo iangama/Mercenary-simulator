@@ -170,6 +170,7 @@ Documentos auxiliares:
 - [DEMO_GUIDE.md](/mnt/c/Users/Ian/mercenary-company/DEMO_GUIDE.md)
 - [EXPOSURE_CHECKLIST.md](/mnt/c/Users/Ian/mercenary-company/EXPOSURE_CHECKLIST.md)
 - [GITHUB_PREP.md](/mnt/c/Users/Ian/mercenary-company/GITHUB_PREP.md)
+- [RENDER_DEPLOY.md](/mnt/c/Users/Ian/mercenary-company/RENDER_DEPLOY.md)
 
 ## Validação
 
